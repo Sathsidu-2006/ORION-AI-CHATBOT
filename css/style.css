@@ -74,3 +74,13 @@ body {
     filter: drop-shadow(0 0 30px #06B6D4);
 }
 
+.heading {
+    margin: 0;
+    color: white;
+    font-size: 25px;
+}
+
+.h-p {
+    margin-top: 3px;
+    color: #88919dda;
+}
