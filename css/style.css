@@ -84,3 +84,34 @@ body {
     margin-top: 3px;
     color: #88919dda;
 }
+
+.chat-box{
+    flex: 1;
+    overflow: auto;
+    padding: 15px;
+
+}
+
+.message{
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 50%;
+    line-height: 1.4;
+    background-color: #303542;
+    color: white;
+}
+
+.user-message{
+    background-color: #055e6d;
+    color: white;
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.bot-message{
+    background-color: #575d5f;
+    color: white;
+    margin-right: auto;
+    align-self: flex-start;
+}
