@@ -115,3 +115,42 @@ body {
     margin-right: auto;
     align-self: flex-start;
 }
+
+.input-area{
+    display: flex;
+    padding: 10px;
+    margin: 5px;
+    background-color: #151C2C;
+    border-radius: 10px;
+
+}
+
+.user-input{
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #151C2C;
+    background-color: #151C2C;
+    outline: none;
+    border-radius: 10px;
+    color: white;
+}
+
+.user-input::placeholder {
+  color: #8e96a0;
+}
+
+.send-btn{
+    background-color: #056171;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    width: 20;
+}
+
+.send-btn:hover{
+    background-color: #06B6D4;
+}
