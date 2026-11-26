@@ -1,4 +1,5 @@
-import { API_KEY } from "./config";
+const GEMINI_API_KEY = CONFIG.API_KEY; 
+
 
 let chatBox = document.getElementById("chat-box");
 let userInput = document.getElementById("user-input");
@@ -36,10 +37,10 @@ function sendMessageOnAction() {
 }
 
 
-function getResponse(userMessage) {
+async function getResponse(userMessage) {
 
-    fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${API_KEY}`,
+   await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`,
         {
             method: "POST",
 
@@ -48,14 +49,6 @@ function getResponse(userMessage) {
             },
 
             body: JSON.stringify({
-
-            //     systemInstruction: {
-            //         parts: [
-            //             {
-            //                 text: BUDDY_INSTRUCTIONS
-            //             }
-            //         ]
-            //     },
 
                 contents: [
                     {
