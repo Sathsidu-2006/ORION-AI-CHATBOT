@@ -1,10 +1,23 @@
+
+
 let chatBox = document.getElementById("chat-box");
+let userInput = document.getElementById("user-input");
+
+
+userInput.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendMessageOnAction();
+    }
+
+});
 
 function sendMessageOnAction() {
 
-    let inputField = document.getElementById("user-input");
+    
 
-    let userMessage = inputField.value.trim();
+    let userMessage = userInput.value.trim();
 
     if (userMessage === "") {
         return;
@@ -17,7 +30,73 @@ function sendMessageOnAction() {
         </div>
     `;
 
-    inputField.value = "";
+    userInput.value = "";
 
     getResponse(userMessage);
+}
+
+
+function getResponse(userMessage) {
+
+    fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${API_KEY}`,
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+            //     systemInstruction: {
+            //         parts: [
+            //             {
+            //                 text: BUDDY_INSTRUCTIONS
+            //             }
+            //         ]
+            //     },
+
+                contents: [
+                    {
+                        role: "user",
+
+                        parts: [
+                            {
+                                text: userMessage
+                            }
+                        ]
+                    }
+                ]
+
+            })
+        }
+    )
+    .then(response => {
+        return response.json();
+
+    })
+    .then(data => {
+
+        console.log(data);
+
+        chatBox.innerHTML +=`
+            <div class="message bot-message">${data.candidates[0].content.parts[0].text}</div>`;
+
+    })
+
+    .catch(error => {
+
+        console.log(error);
+
+        
+
+        chatBox.innerHTML += `
+            <div class="message buddy-message">
+                Oops! Something went wrong. Try again! 💜
+            </div>
+        `;
+
+    });
+
 }
