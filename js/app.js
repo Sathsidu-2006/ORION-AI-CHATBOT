@@ -38,22 +38,17 @@ function sendMessageOnAction() {
 
 
 async function getResponse(userMessage) {
-
-   await fetch(
+    await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`,
         {
             method: "POST",
-
             headers: {
                 "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
-
                 contents: [
                     {
                         role: "user",
-
                         parts: [
                             {
                                 text: userMessage
@@ -61,35 +56,27 @@ async function getResponse(userMessage) {
                         ]
                     }
                 ]
-
             })
         }
     )
     .then(response => {
         return response.json();
-
     })
     .then(data => {
-
         console.log(data);
+        const rawText = data.candidates[0].content.parts[0].text;
+        const formattedHTML = marked.parse(rawText);
 
-        chatBox.innerHTML +=`
-            <div class="message bot-message">${data.candidates[0].content.parts[0].text}</div>`;
-
+        chatBox.innerHTML += `
+            <div class="message bot-message">${formattedHTML}</div>
+        `;
     })
-
     .catch(error => {
-
         console.log(error);
-
-        
-
         chatBox.innerHTML += `
             <div class="message buddy-message">
                 Oops! Something went wrong. Try again! 💜
             </div>
         `;
-
     });
-
 }
